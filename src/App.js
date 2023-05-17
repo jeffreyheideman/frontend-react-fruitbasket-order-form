@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import './App.css';
+import Mainbutton from "./components/Mainbutton";
+import IncreaseDecreasebutton from "./components/IncreaseDecreasebutton";
+import Input from "./components/Input";
 
 
 
@@ -15,13 +18,20 @@ function App() {
         }
     }
 
+    function resetCounters() {
+        setStrawberryCounter(0)
+        setBananaCounter(0)
+        setAppleCounter(0)
+        setKiwiCounter(0)
+    }
+
     const [formState, setFormState] = useState({
         firstname: '',
         lastname: '',
         age: '0',
         zipcode: '',
         deliveryfrequency: 'Iedere week',
-        moment: 'afternoon',
+        moment: 'Overdag',
         message: '',
         conditions: false
 
@@ -49,93 +59,40 @@ function App() {
                 <h1>Fruitmand bezorgservice</h1>
                 <div>
                     <h2>Aardbeien</h2>
-                    <button type="button" onClick={() => setStrawberryCounter(strawberryCounter + 1)}>+</button>
+                    <IncreaseDecreasebutton name="+" onClick={() => setStrawberryCounter(strawberryCounter + 1)}/>
                     <p>{strawberryCounter}</p>
-                    <button type="button" onClick={() => decreaseCounter(strawberryCounter, setStrawberryCounter)}>-
-                    </button>
+                    <IncreaseDecreasebutton name="-" onClick={() => decreaseCounter(strawberryCounter, setStrawberryCounter)}/>
                 </div>
 
                 <div>
                     <h2>Bananen</h2>
-                    <button type="button" onClick={() => setBananaCounter(bananaCounter + 1)}>+</button>
+                    <IncreaseDecreasebutton name="+" onClick={() => setBananaCounter(bananaCounter + 1)}/>
                     <p>{bananaCounter}</p>
-                    <button type="button" onClick={() => decreaseCounter(bananaCounter, setBananaCounter)}>-</button>
+                    <IncreaseDecreasebutton name="-" onClick={() => decreaseCounter(bananaCounter, setBananaCounter)}/>
                 </div>
 
                 <div>
                     <h2>Appels</h2>
-                    <button type="button" onClick={() => setAppleCounter(appleCounter + 1)}>+</button>
+                    <IncreaseDecreasebutton name="+" onClick={() => setAppleCounter(appleCounter + 1)}/>
                     <p>{appleCounter}</p>
-                    <button type="button" onClick={() => decreaseCounter(appleCounter, setAppleCounter)}>-</button>
+                    <IncreaseDecreasebutton name="-" onClick={() => decreaseCounter(appleCounter, setAppleCounter)}/>
                 </div>
 
                 <div>
                     <h2>Kiwi's</h2>
-                    <button type="button" onClick={() => setKiwiCounter(kiwiCounter + 1)}>+</button>
+                    <IncreaseDecreasebutton name="+" onClick={() => setKiwiCounter(kiwiCounter + 1)}/>
                     <p>{kiwiCounter}</p>
-                    <button type="button" onClick={() => decreaseCounter(kiwiCounter, setKiwiCounter)}>-</button>
+                    <IncreaseDecreasebutton name="-" onClick={() => decreaseCounter(kiwiCounter, setKiwiCounter)}/>
                 </div>
 
-
-                <button
-                    type="button"
-                    onClick={() => {
-                        setStrawberryCounter(0)
-                        setBananaCounter(0)
-                        setAppleCounter(0)
-                        setKiwiCounter(0)
-                    }}
-                >Reset
-                </button>
+                <Mainbutton name="Reset" resetCounters={resetCounters} type="button"/>
 
                 <form onSubmit={handleSubmit}>
-                    <label htmlFor="firstname">
-                        Voornaam
-                        <input
-                            type="text"
-                            id="firstname"
-                            name="firstname"
-                            value={formState.firstname}
-                            onChange={handleChange}
-                        />
-                    </label>
-                    <br/>
+                   <Input label="Voornaam" name="firstname" type="text" value={formState.firstname} onChange={handleChange}/>
+                    <Input label="Achternaam" name="lastname" type="text" value={formState.lastname} onChange={handleChange}/>
+                    <Input label="Leeftijd" name="age" type="text" value={formState.age} onChange={handleChange}/>
+                    <Input label="Postcode" name="zipcode" type="text" value={formState.zipcode} onChange={handleChange}/>
 
-                    <label htmlFor="lastname">
-                        Achternaam
-                        <input
-                            type="text"
-                            id="lastname"
-                            name="lastname"
-                            value={formState.lastname}
-                            onChange={handleChange}
-                        />
-                    </label>
-                    <br/>
-
-                    <label htmlFor="age">
-                        leeftijd
-                        <input
-                            type="text"
-                            id="age"
-                            name="age"
-                            value={formState.age}
-                            onChange={handleChange}
-                        />
-                    </label>
-                    <br/>
-
-                    <label htmlFor="zipcode">
-                        Postcode
-                        <input
-                            type="text"
-                            id="zipcode"
-                            name="zipcode"
-                            value={formState.zipcode}
-                            onChange={handleChange}
-                        />
-                    </label>
-                    <br/>
                     <label htmlFor="delivery-frequency">
                         Bezorgfrequentie
                         <select name="deliveryfrequency" id="delivery-frequency" onChange={handleChange} value={formState.deliveryfrequency}>
@@ -181,7 +138,7 @@ function App() {
                         Ik ga akkoord met de voorwaarden
                     </label>
                     <br/>
-                    <button type="submit">Verzend</button>
+                    <Mainbutton name="Verzend" type="submit"/>
                     
                 </form>
 
