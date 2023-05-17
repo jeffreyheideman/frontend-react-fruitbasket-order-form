@@ -20,8 +20,8 @@ function App() {
         lastname: '',
         age: '0',
         zipcode: '',
-        deliveryfrequency: '',
-        partOfDay: 'afternoon',
+        deliveryfrequency: 'Iedere week',
+        moment: 'afternoon',
         message: '',
         conditions: false
 
@@ -145,25 +145,25 @@ function App() {
                         </select>
                     </label>
                     <br/>
-
+                    {/*radiobuttons werken nog niet*/}
                     <label htmlFor="afternoon">
                         Overdag
                         <input type="radio"
                                id="afternoon"
-                                name="part-of-day"
+                                name="moment"
                                value="afternoon"
                                onChange={handleChange}
-                               checked={formState.partOfDay === "afternoon"}
+                               checked={formState.moment === "afternoon"}
                                 />
                     </label>
                     <label htmlFor="evening">
                         'S Avonds
                         <input type="radio"
                                 id="evening"
-                                name="part-of-day"
+                                name="moment"
                                 onChange={handleChange}
                                 value="evening"
-                                checked={formState.partOfDay === "evening"}/>
+                                checked={formState.moment === "evening"}/>
                     </label>
                     <br/>
                     <label htmlFor="message">
@@ -172,10 +172,10 @@ function App() {
                         <textarea name="message" id="message" cols="30" rows="10" value={formState.message} onChange={handleChange}></textarea>
                     </label>
                     <br/>
-                    <label htmlFor="terms-and-conditions">
+                    <label htmlFor="conditions">
                         <input type="checkbox"
-                                id="terms-and-conditions"
-                                name="terms-and conditions"
+                                id="conditions"
+                                name="conditions"
                                 checked={formState.conditions}
                                 onChange={handleChange}/>
                         Ik ga akkoord met de voorwaarden
