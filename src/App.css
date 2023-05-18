@@ -1,0 +1,72 @@
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.fruitcounter {
+    display: flex;
+    justify-content: center;
+    padding: 2rem;
+    margin: 20px 5px 5px 5px;
+    gap: 1rem;
+    border: 1px solid black;
+    border-radius: 5px;
+    width: 350px;
+}
+
+.increase-decrease-default-btn {
+    padding: 5px 10px;
+}
+
+.increase-decrease-active-btn {
+    padding: 5px 10px;
+    border: 2px solid green;
+
+}
+
+.reset-btn {
+    width: 350px;
+    padding: 5px 0;
+    margin: 1rem;
+    border-radius: 5px;
+    border: 1px solid black;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.input-label {
+    padding-bottom: 1rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.input-field {
+    width: 180px;
+}
+
+.delivery-freq-container {
+    padding-bottom: 1rem;
+}
+
+.select-box {
+    margin-top: 1rem;
+}
+
+.radiobutton-container {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+

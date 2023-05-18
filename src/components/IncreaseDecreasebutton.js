@@ -1,8 +1,11 @@
 import React from 'react';
+import "../App.css"
 
-function IncreaseDecreasebutton({name, onClick}) {
+
+function IncreaseDecreasebutton({name, onClick, className}) {
     return (
-        <button type="button" onClick={onClick}>{name}</button>
+        <button className={className}
+                type="button" onClick={onClick}>{name}</button>
     );
 }
 

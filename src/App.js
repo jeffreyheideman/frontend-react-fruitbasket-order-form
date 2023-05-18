@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import './App.css';
 import Mainbutton from "./components/Mainbutton";
-import IncreaseDecreasebutton from "./components/IncreaseDecreasebutton";
 import Input from "./components/Input";
-
+import Fruitcounter from "./components/Fruitcounter";
+import emoji from "emoji-dictionary";
 
 
 function App() {
@@ -54,97 +54,107 @@ function App() {
         e.preventDefault()
         console.log(strawberryCounter, bananaCounter, appleCounter, kiwiCounter, formState)
     }
-        return (
-            <>
+
+    function convertEmoji(em) {
+        return emoji.getUnicode(em)
+    }
+
+    return (
+        <>
+            <main>
                 <h1>Fruitmand bezorgservice</h1>
-                <div>
-                    <h2>Aardbeien</h2>
-                    <IncreaseDecreasebutton name="+" onClick={() => setStrawberryCounter(strawberryCounter + 1)}/>
-                    <p>{strawberryCounter}</p>
-                    <IncreaseDecreasebutton name="-" onClick={() => decreaseCounter(strawberryCounter, setStrawberryCounter)}/>
-                </div>
+                <Fruitcounter title="Aardbeien"
+                              onClickIncrease={() => setStrawberryCounter(strawberryCounter + 1)}
+                              onClickDecrease={() => decreaseCounter(strawberryCounter, setStrawberryCounter)}
+                              className={strawberryCounter >= 1 ? "increase-decrease-active-btn" : "increase-decrease-default-btn"}
+                              counter={strawberryCounter}
+                              emoji={convertEmoji("strawberry")}/>
 
-                <div>
-                    <h2>Bananen</h2>
-                    <IncreaseDecreasebutton name="+" onClick={() => setBananaCounter(bananaCounter + 1)}/>
-                    <p>{bananaCounter}</p>
-                    <IncreaseDecreasebutton name="-" onClick={() => decreaseCounter(bananaCounter, setBananaCounter)}/>
-                </div>
+                <Fruitcounter title="Bananen"
+                              onClickIncrease={() => setBananaCounter(bananaCounter + 1)}
+                              onClickDecrease={() => decreaseCounter(bananaCounter, setBananaCounter)}
+                              className={bananaCounter >= 1 ? "increase-decrease-active-btn" : "increase-decrease-default-btn"}
+                              counter={bananaCounter}
+                                emoji={convertEmoji("banana")}/>
 
-                <div>
-                    <h2>Appels</h2>
-                    <IncreaseDecreasebutton name="+" onClick={() => setAppleCounter(appleCounter + 1)}/>
-                    <p>{appleCounter}</p>
-                    <IncreaseDecreasebutton name="-" onClick={() => decreaseCounter(appleCounter, setAppleCounter)}/>
-                </div>
+                <Fruitcounter title="Appels"
+                              onClickIncrease={() => setAppleCounter(appleCounter + 1)}
+                              onClickDecrease={() => decreaseCounter(appleCounter, setAppleCounter)}
+                              className={appleCounter >= 1 ? "increase-decrease-active-btn" : "increase-decrease-default-btn"}
+                              counter={appleCounter}
+                              emoji={convertEmoji("apple")}/>
 
-                <div>
-                    <h2>Kiwi's</h2>
-                    <IncreaseDecreasebutton name="+" onClick={() => setKiwiCounter(kiwiCounter + 1)}/>
-                    <p>{kiwiCounter}</p>
-                    <IncreaseDecreasebutton name="-" onClick={() => decreaseCounter(kiwiCounter, setKiwiCounter)}/>
-                </div>
+                <Fruitcounter title="Kiwi's"
+                              onClickIncrease={() => setKiwiCounter(kiwiCounter + 1)}
+                              onClickDecrease={() => decreaseCounter(kiwiCounter, setKiwiCounter)}
+                              className={kiwiCounter >= 1 ? "increase-decrease-active-btn" : "increase-decrease-default-btn"}
+                              counter={kiwiCounter}
+                              emoji="🥝"/>
 
                 <Mainbutton name="Reset" resetCounters={resetCounters} type="button"/>
 
                 <form onSubmit={handleSubmit}>
-                   <Input label="Voornaam" name="firstname" type="text" value={formState.firstname} onChange={handleChange}/>
-                    <Input label="Achternaam" name="lastname" type="text" value={formState.lastname} onChange={handleChange}/>
+                    <Input label="Voornaam" name="firstname" type="text" value={formState.firstname}
+                           onChange={handleChange}/>
+                    <Input label="Achternaam" name="lastname" type="text" value={formState.lastname}
+                           onChange={handleChange}/>
                     <Input label="Leeftijd" name="age" type="text" value={formState.age} onChange={handleChange}/>
-                    <Input label="Postcode" name="zipcode" type="text" value={formState.zipcode} onChange={handleChange}/>
+                    <Input label="Postcode" name="zipcode" type="text" value={formState.zipcode}
+                           onChange={handleChange}/>
 
-                    <label htmlFor="delivery-frequency">
+                    <label htmlFor="delivery-frequency" className="delivery-freq-container">
                         Bezorgfrequentie
-                        <select name="deliveryfrequency" id="delivery-frequency" onChange={handleChange} value={formState.deliveryfrequency}>
+                        <br/>
+                        <select className="select-box" name="deliveryfrequency" id="delivery-frequency" onChange={handleChange}
+                                value={formState.deliveryfrequency}>
                             <option value="every-week">Iedere week</option>
                             <option value="every-2-weeks">Om de week</option>
                             <option value="every-month">Iedere maand</option>
                         </select>
                     </label>
-                    <br/>
-                    {/*radiobuttons werken nog niet*/}
+                    <div className="radiobutton-container">
                     <label htmlFor="afternoon">
-                        Overdag
                         <input type="radio"
                                id="afternoon"
-                                name="moment"
+                               name="moment"
                                value="afternoon"
                                onChange={handleChange}
                                checked={formState.moment === "afternoon"}
-                                />
+                        />
+                        Overdag
                     </label>
                     <label htmlFor="evening">
-                        'S Avonds
                         <input type="radio"
-                                id="evening"
-                                name="moment"
-                                onChange={handleChange}
-                                value="evening"
-                                checked={formState.moment === "evening"}/>
+                               id="evening"
+                               name="moment"
+                               onChange={handleChange}
+                               value="evening"
+                               checked={formState.moment === "evening"}/>
+                        'S Avonds
                     </label>
-                    <br/>
+                    </div>
                     <label htmlFor="message">
                         Opmerking
                         <br/>
-                        <textarea name="message" id="message" cols="30" rows="10" value={formState.message} onChange={handleChange}></textarea>
+                        <textarea name="message" id="message" cols="30" rows="10" value={formState.message}
+                                  onChange={handleChange}></textarea>
                     </label>
-                    <br/>
                     <label htmlFor="conditions">
                         <input type="checkbox"
-                                id="conditions"
-                                name="conditions"
-                                checked={formState.conditions}
-                                onChange={handleChange}/>
+                               id="conditions"
+                               name="conditions"
+                               checked={formState.conditions}
+                               onChange={handleChange}/>
                         Ik ga akkoord met de voorwaarden
                     </label>
-                    <br/>
                     <Mainbutton name="Verzend" type="submit"/>
-                    
+
                 </form>
+            </main>
 
 
-            </>
-        );
+        </>
+    );
 
 }
 
